@@ -2474,6 +2474,11 @@ func yaml_parser_scan_flow_scalar(parser *yaml_parser_t, token *yaml_token_t, si
 			}
 		}
 
+		// justin: Added this...
+		if parser.unread < 1 && !yaml_parser_update_buffer(parser, 1) {
+			return false
+		}
+
 		// Check if we are at the end of the scalar.
 		if single {
 			if parser.buffer[parser.buffer_pos] == '\'' {
